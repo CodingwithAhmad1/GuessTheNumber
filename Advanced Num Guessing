@@ -1,1 +1,215 @@
+print("Hello user. This is a guessing game. Please read the instructions.")
+usermode = input(
+    "In this game, you have to guess the correctnumber before the other player. Would you like to play in easy mode (guess the number between 1 and 10 with 3 lives and score 10 points) or medium mode (guess the number between 1 and 20 with 3 lives and score 20 points) or hard mode (guess the number between 1 and 50 with 5 lives and score 50 points): ")
+
+lives = 0
+numrange = 0
+score = 0
+import random
+if usermode == "easy mode":
+    lives = 3
+    numrange = 10
+    score = 10
+    robotnum1 = random.randint(1, numrange)
+    robotnum2 = random.randint(1, numrange)
+    robotnum3 = random.randint(1, numrange)
+elif usermode == "medium mode":
+    lives = 3
+    numrange = 20
+    score = 20
+    robotnum1 = random.randint(1, numrange)
+    robotnum2 = random.randint(1, numrange)
+    robotnum3 = random.randint(1, numrange)
+elif usermode == "hard mode":
+    lives = 5
+    numrange = 50
+    score = 50
+    robotnum1 = random.randint(1, numrange)
+    robotnum2 = random.randint(1, numrange)
+    robotnum3 = random.randint(1, numrange)
+
+rnum = random.randint(1, numrange)
+
+print("The game will start in:")
+
+#allows player to get ready
+import time
+
+
+def countdown(number):
+    while number:
+        mins, secs = divmod(number, 60)
+        timer = '{:02d}:{:02d}'.format(mins, secs)
+        print(timer, end="\r")
+        time.sleep(1)
+        number -= 1
+
+
+number = (3)
+countdown(int(number))
+
+usernum1 = int(
+    input("Please guess a number between 1 and " + str(numrange) + ": "))
+
+higher_or_lower = " "
+if usernum1 > rnum:
+    higher_or_lower = "lower "
+if usernum1 < rnum:
+    higher_or_lower = "higher"
+
+#if there is a winner
+while (usernum1 == rnum
+       and robotnum1 == rnum) or (robotnum1 == rnum) or (usernum1 == rnum):
+    if usernum1 == rnum and robotnum1 == rnum:
+        print("You have scored " + str(score) + " points.")
+        print("It's a tie. You both win!")
+        break
+    if robotnum1 == rnum:
+        print("You lose!")
+        break
+    if usernum1 == rnum:
+        print("Well done. You have won!")
+        print("You have scored " + str(score) + " points.")
+        break
+
+#possibilities if no winner
+usernum2 = 0
+if usernum1 != rnum and robotnum1 != rnum:
+  print("Incorrect. The correct number is " + higher_or_lower + ".")
+  print("The opponent player has chosen the number " + str(robotnum1) + ".")
+  usernum2 = int(input("You have " + str(lives - 1) + " lives remaining. Please try again: "))
+    
+
+higher_or_lower = " "
+if usernum2 > rnum:
+    higher_or_lower = "lower "
+if usernum2 < rnum:
+    higher_or_lower = "higher"
+
+while (usernum2 == rnum
+       and robotnum2 == rnum) or (robotnum2 == rnum) or (usernum2 == rnum):
+    if usernum2 == rnum and robotnum2 == rnum:
+        print("You have scored " + str(score) + "points.")
+        print("It's a tie. You both win!")
+        break
+    if robotnum1 == rnum:
+        print("You lose!")
+        break
+    if usernum2 == rnum:
+        print("Well done. You have won!")
+        print("You have scored " + str(score) + " points.")
+        break
+
+life = " "
+if usermode == "easy mode" or "medium mode":
+    life = "life"
+if usermode == "hard mode":
+    life = "lives"
+
+
+usernum3 = 0
+while usernum1 != rnum and usernum2 != rnum and robotnum1 != rnum and robotnum2 != rnum:
+    print("Incorrect. The correct number is " + higher_or_lower + ".")
+    print("The opponent player has chosen the number " + str(robotnum2) + ".")
+    usernum3 = int(
+      input("You have " + str(lives - 2) + life + " remaining. Please try again: "))
+    break
+
+
+higher_or_lower = " "
+if usernum3 > rnum:
+    higher_or_lower = "lower "
+if usernum3 > rnum:
+    higher_or_lower = "higher"
+
+while (usernum3 == rnum
+       and robotnum3 == rnum) or (robotnum3 == rnum) or (usernum3 == rnum):
+    if usernum3 == rnum and robotnum3 == rnum:
+        print("You have scored " + str(score) + " points.")
+        print("It's a tie. You both win!")
+        break
+    if robotnum3 == rnum:
+        print("You lose!")
+        break
+    if usernum3 == rnum:
+        print("Well done. You have won!")
+        print("You have scored " + str(score) + " points.")
+        break
+
+higher_or_lower1 = " "
+if usermode == "easy mode" or "medium mode": higher_or_lower1 = str(rnum)
+if usermode == "hard mode" and usernum3 > rnum:
+  higher_or_lower1 = "lower"
+if usermode == "hard mode" and usernum3 < rnum:
+  higher_or_lower1 = "higher"
+
+
+usernum4 = 0
+while usernum1 != rnum and usernum2 != rnum and usernum3 != rnum and robotnum1 != rnum and robotnum2 != rnum and  robotnum3 != rnum and lives > 0:
+  if usermode == "easy mode" or "medium mode":
+    print("The opponent player has chosen the number " + str(robotnum3) + ".")
+    print("You have no more lives remaining. You have lost!")
+    break
+  if usermode == "hard mode":
+    print("Incorrect. The correct number is " + higher_or_lower1 + ".")
+    print("The opponent player has chosen the number " + str(robotnum2) + ".")
+    usernum4 = int(input("You have " + str(lives - 3) + life + " remaining. Please try again: "))
+    break
+                
+
+
+higher_or_lower = " "
+if usermode == "easy mode" or "medium mode":
+    higher_or_lower = str(rnum)
+elif usernum4 > rnum:
+    higher_or_lower = "lower "
+elif usernum4 < rnum:
+    higher_or_lower = "higher"
+
+#to include these variables, must be seperate
+robotnum4 = random.randint(1, numrange)
+robotnum5 = random.randint(1, numrange)
+
+while (usernum4 == rnum
+       and robotnum4 == rnum) or (robotnum4 == rnum) or (usernum4 == rnum):
+    if usernum4 == rnum and robotnum4 == rnum:
+        print("Your score is " + score + " points.")
+        print("It's a tie. You both win!")
+        break
+    if robotnum4 == rnum:
+        print("You lose!")
+        break
+    if usernum4 == rnum:
+        print("Well done. You have won!")
+        break
+
+usernum5 = 0
+while usernum1 != rnum and usernum2 != rnum and usernum3 != rnum and usernum4 != rnum and robotnum2 != rnum and robotnum3 != rnum and robotnum4 != rnum and lives > 0:
+    print("Incorrect. The correct number is " + higher_or_lower + ".")
+    print("The opponent player has chosen the number " + str(robotnum4) + ".")
+    usernum5 = int(
+        input("You have " + str(lives - 4) +
+              " lives remaining. Please try again: "))
+
+ 
+higher_or_lower = " "
+if usernum5 > rnum:
+    higher_or_lower = "lower "
+if usernum5 < rnum:
+    higher_or_lower = "higher"
+
+while (usernum5 == rnum and robotnum5 == rnum) or (
+        robotnum5 == rnum) or (usernum5 == rnum) or usernum5 != rnum:
+    if usernum5 == rnum and robotnum5 == rnum:
+        print("Your score is " + score + " points.")
+        print("It's a tie. You both win!")
+        break
+    if usernum5 != rnum:
+        print("You have run out of lives. You lose!")
+    if robotnum5 == rnum:
+        print("You lose!")
+        break
+    if usernum5 == rnum:
+        print("Well done. You have won!")
+        break
 
